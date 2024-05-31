@@ -1,0 +1,22 @@
+{
+    "MACDStrategy": {
+        "fastema": 12,
+        "slowema": 26,
+        "signal": 9
+    },
+    "RSIStrategy": {
+        "rsi_period": 14,
+        "rsi_upper": 70,
+        "rsi_lower": 30
+    },
+    "BollingerStrategy": {
+        "period": 20,
+        "devfactor": 2.0
+    },
+    "BreakoutStrategy": {
+        "lookback_period": 20
+    },
+    "VWAPStrategy": {
+        "vwap_param": "default"
+    }
+}

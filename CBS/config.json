@@ -1,0 +1,17 @@
+{
+  "dryrun" : false,
+  "request": {
+    "interval": "1m",
+    "start": "2020-01-01",
+    "end": "2020-01-2"
+  },
+  "coin" : {
+    "whitelist" : [
+        "BTC/USDT",
+        "ETH/USDT"
+      ],
+    "blacklist" : []
+  },
+  "strategy" :  "BollingerStrategy",
+  "cash" : 100000
+}
