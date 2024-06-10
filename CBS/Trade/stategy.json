@@ -15,8 +15,5 @@
     },
     "BreakoutStrategy": {
         "lookback_period": 20
-    },
-    "VWAPStrategy": {
-        "vwap_param": "default"
     }
 }

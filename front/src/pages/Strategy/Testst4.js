@@ -1,16 +1,21 @@
 import React from 'react';
-import SliderOption from '../Option/SliderOption';
+import InputOption from "../Option/InputOption";
 
 function Strategy4Component({ strategyParams, handleParamChange }) {
+
   return (
-    <SliderOption
-      label="슬라이더 조정"
-      min={1}
-      max={10}
-      value={strategyParams.sliderOption || 1}
-      onChange={(value) => handleParamChange('sliderOption', value)}
-    />
+      <div>
+        <InputOption
+                key={1}
+                label='lookback_period'
+                value={strategyParams[`lookback_period`] || ''}
+                onChange={(e) => handleParamChange(`lookback_period`, e.target.value)}
+                minmax="default: 20"
+            />
+      </div>
   );
 }
+
+
 
 export default Strategy4Component;

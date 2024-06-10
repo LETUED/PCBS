@@ -1,19 +1,32 @@
 import React from 'react';
-import SelectOption from '../Option/SelectOption';
+import InputOption from "../Option/InputOption";
 
-function Strategy2Component({ strategyParams, handleParamChange }) {
-  return (
-    <SelectOption
-      label="옵션 2 선택"
-      options={[
-        { value: "option1", label: "옵션 1" },
-        { value: "option2", label: "옵션 2" },
-        { value: "option3", label: "옵션 3" }
-      ]}
-      value={strategyParams.selectOption || ''}
-      onChange={(e) => handleParamChange('selectOption', e.target.value)}
-    />
-  );
+function Strategy2Component({strategyParams, handleParamChange}) {
+    return (
+        <div>
+            <InputOption
+                key={1}
+                label='rsi_period'
+                value={strategyParams[`rsi_period`] || ''}
+                onChange={(e) => handleParamChange(`rsi_period`, e.target.value)}
+                minmax="default: 14"
+            />
+            <InputOption
+                key={1}
+                label='rsi_upper'
+                value={strategyParams[`rsi_upper`] || ''}
+                onChange={(e) => handleParamChange(`rsi_upper`, e.target.value)}
+                minmax="default: 70"
+            />
+            <InputOption
+                key={1}
+                label='rsi_lower'
+                value={strategyParams[`rsi_lower`] || ''}
+                onChange={(e) => handleParamChange(`rsi_lower`, e.target.value)}
+                minmax="default: 30"
+            />
+        </div>
+    );
 }
 
 export default Strategy2Component;

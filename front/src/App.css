@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+.react-date-range {
+    width: 100% !important; /* 달력의 너비를 100%로 설정 */
+    max-width: none !important; /* 최대 너비 제한을 제거 */
+}

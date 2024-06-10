@@ -6,7 +6,7 @@ function TopDataBox({ onSelectCoin }) {
     const [selectedCoin, setSelectedCoin] = useState(null);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/api/crypto') // Flask 서버의 URL을 명시적으로 작성
+        fetch('http://127.0.0.1:5000/api/crypto')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -14,7 +14,7 @@ function TopDataBox({ onSelectCoin }) {
                 return response.json();
             })
             .then(data => {
-                console.log('Fetched data:', data); // 데이터 확인을 위한 콘솔 출력
+                console.log('Fetched data:', data);
                 if (Array.isArray(data)) {
                     setCryptoData(data);
                 } else {

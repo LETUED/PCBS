@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Grid, Box, Typography } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import { CONFIG_ROUTE } from "./routes";
@@ -10,8 +10,18 @@ import M_fig from "./components/M_fig";
 
 function MainPage() {
     const title = 'Main Page';
-    const [selectedCoin, setSelectedCoin] = useState(null);
+    const [selectedCoin, setSelectedCoin] = useState(() => {
+        // 초기값을 로컬스토리지에서 가져오기
+        return localStorage.getItem('coin') || null;
+    });
     const navigate = useNavigate();
+
+    // selectedCoin이 변경될 때마다 로컬스토리지에 저장
+    useEffect(() => {
+        if (selectedCoin !== null) {
+            localStorage.setItem('coin', selectedCoin);
+        }
+    }, [selectedCoin]);
 
     return (
         <BackGround title={title}>

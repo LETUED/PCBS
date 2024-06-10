@@ -1,7 +1,7 @@
-import React, {useState, useRef} from "react";
-import {useNavigate} from "react-router-dom";
-import {BACKTEST_ROUTE, DRYRUN_ROUTE, SHOW_JSON_ROUTE} from "./routes";
-import {Box, Container, Typography, Stack, Grid} from "@mui/material";
+import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { BACKTEST_ROUTE, DRYRUN_ROUTE } from "./routes";
+import { Box, Container, Typography, Stack, Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import DropDownOption from "./Option/DropdownOption";
 import BackGround from "./template/BackGround";
@@ -9,8 +9,8 @@ import {
     saveToLocalStorage,
     exportLocalStorageAsJson,
     loadFromLocalStorage,
-    clearLocalStorage,
-    saveStrategyToLocalStorage
+    saveStrategyToLocalStorage,
+    saveConfigToLocalStorage
 } from './utils';
 import Strategy1Component from './Strategy/Testst1';
 import Strategy2Component from './Strategy/Testst2';
@@ -18,10 +18,10 @@ import Strategy3Component from './Strategy/Testst3';
 import Strategy4Component from './Strategy/Testst4';
 
 const strategyOptions = [
-    {value: 'strategy1', label: 'Strategy 1'},
-    {value: 'strategy2', label: 'Strategy 2'},
-    {value: 'strategy3', label: 'Strategy 3'},
-    {value: 'strategy4', label: 'Strategy 4'}
+    { value: 'MACDStrategy', label: 'MACDStrategy' },
+    { value: 'RSIStrategy', label: 'RSIStrategy' },
+    { value: 'BollingerStrategy', label: 'BollingerStrategy' },
+    { value: 'BreakoutStrategy', label: 'BreakoutStrategy' }
 ];
 
 function StrategyPage() {
@@ -30,10 +30,6 @@ function StrategyPage() {
     const [strategyParams, setStrategyParams] = useState({});
     const fileInputRef = useRef(null);
 
-    const handleBacktest = () => navigate(BACKTEST_ROUTE);
-    const handleDryrun = () => navigate(DRYRUN_ROUTE);
-    const handleShowJson = () => navigate(SHOW_JSON_ROUTE);
-
     const handleStrategyChange = (event) => {
         setStrategy(event.target.value);
         const params = loadFromLocalStorage(event.target.value) || {};
@@ -41,24 +37,21 @@ function StrategyPage() {
     };
 
     const handleParamChange = (key, value) => {
-        setStrategyParams(prev => ({...prev, [key]: value}));
+        setStrategyParams(prev => ({ ...prev, [key]: value }));
     };
 
     const handleSaveStrategy = () => {
-        saveStrategyToLocalStorage('config', strategy, strategyParams);
+        const strategyData = {
+            name: strategy,
+            ...strategyParams
+        };
+        saveStrategyToLocalStorage('strategy', strategyData);
         alert('Strategy parameters saved');
     };
 
     const handleExportLocalStorage = () => {
         const allDataJson = exportLocalStorageAsJson();
         alert(allDataJson);
-    };
-
-    const handleClearLocalStorage = () => {
-        clearLocalStorage();
-        setStrategy('');
-        setStrategyParams({});
-        alert('LocalStorage cleared');
     };
 
     const handleFileUploadTrigger = () => {
@@ -72,21 +65,21 @@ function StrategyPage() {
 
     const renderOptions = () => {
         switch (strategy) {
-            case 'strategy1':
+            case 'MACDStrategy':
                 return (
-                    <Strategy1Component strategyParams={strategyParams} handleParamChange={handleParamChange}/>
+                    <Strategy1Component strategyParams={strategyParams} handleParamChange={handleParamChange} />
                 );
-            case 'strategy2':
+            case 'RSIStrategy':
                 return (
-                    <Strategy2Component strategyParams={strategyParams} handleParamChange={handleParamChange}/>
+                    <Strategy2Component strategyParams={strategyParams} handleParamChange={handleParamChange} />
                 );
-            case 'strategy3':
+            case 'BollingerStrategy':
                 return (
-                    <Strategy3Component strategyParams={strategyParams} handleParamChange={handleParamChange}/>
+                    <Strategy3Component strategyParams={strategyParams} handleParamChange={handleParamChange} />
                 );
-            case 'strategy4':
+            case 'BreakoutStrategy':
                 return (
-                    <Strategy4Component strategyParams={strategyParams} handleParamChange={handleParamChange}/>
+                    <Strategy4Component strategyParams={strategyParams} handleParamChange={handleParamChange} />
                 );
             default:
                 return <Typography>Select a strategy</Typography>;
@@ -95,9 +88,9 @@ function StrategyPage() {
 
     return (
         <BackGround title="Strategy">
-            <Box sx={{mt: 4, width: '100%'}}>
-                <Container maxWidth="sm" sx={{mt: 4}}>
-                    <Typography variant="h5" sx={{mb: 2}}>
+            <Box sx={{ mt: 4, width: '100%' }}>
+                <Container maxWidth="sm" sx={{ mt: 4 }}>
+                    <Typography variant="h5" sx={{ mb: 2 }}>
                         <h1>전략 선택</h1>
                     </Typography>
                     <Box
@@ -111,7 +104,7 @@ function StrategyPage() {
                             borderRadius: '10px'
                         }}
                     >
-                        <Grid container spacing={2} sx={{display: 'flex', alignItems: 'stretch'}}>
+                        <Grid container spacing={2} sx={{ display: 'flex', alignItems: 'stretch' }}>
                             <Grid item xs={8}>
                                 <DropDownOption
                                     label="Strategy"
@@ -135,7 +128,7 @@ function StrategyPage() {
                                 <input
                                     type="file"
                                     ref={fileInputRef}
-                                    style={{display: 'none'}}
+                                    style={{ display: 'none' }}
                                     onChange={handleFileChange}
                                 />
                             </Grid>
@@ -146,19 +139,19 @@ function StrategyPage() {
                             flexDirection="column"
                             gap={4}
                             p={2}
-                            sx={{border: '2px solid grey', borderRadius: '10px'}}
+                            sx={{ border: '2px solid grey', borderRadius: '10px' }}
                         >
                             {renderOptions()}
                         </Box>
                     </Box>
                     <Box pb={5}>
                         <Stack direction="row" spacing={2}>
-                            <Button variant="contained" onClick={handleBacktest}>Backtest</Button>
-                            <Button variant="contained" onClick={handleDryrun}>Dryrun</Button>
+                            <Button variant="contained" onClick={() => navigate(BACKTEST_ROUTE)}>Backtest</Button>
+                            {/*<Button variant="contained" onClick={() => navigate(DRYRUN_ROUTE)}>Dryrun</Button>*/}
                         </Stack>
                         <Stack direction="row" spacing={2}>
                             <Button variant="contained" onClick={handleSaveStrategy}>Save Strategy</Button>
-                            <Button variant="contained" onClick={handleExportLocalStorage}>Export LocalStorage</Button>
+                            {/*<Button variant="contained" onClick={handleExportLocalStorage}>Export LocalStorage</Button>*/}
                         </Stack>
                     </Box>
                 </Container>

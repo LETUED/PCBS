@@ -1,5 +1,4 @@
 {
-  "dryrun" : false,
   "request": {
     "interval": "1m",
     "start": "2020-01-01",

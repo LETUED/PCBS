@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Box } from '@mui/material';
-
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import Chart from 'react-apexcharts';
 
 function M_fig({ coinName }) {
     const [coinData, setCoinData] = useState(null);
@@ -22,12 +21,68 @@ function M_fig({ coinName }) {
         }
     }, [coinName]);
 
-    const defaultData = [
-        { date: '', price: 0 },
-        { date: '', price: 0 },
-        { date: '', price: 0 },
-        { date: '', price: 0 }
-    ];
+    const defaultData = {
+        series: [
+            {
+                name: 'Candlestick',
+                type: 'candlestick',
+                data: []
+            },
+            {
+                name: 'Line',
+                type: 'line',
+                data: []
+            }
+        ],
+        options: {
+            chart: {
+                height: 350,
+                type: 'candlestick'
+            },
+            title: {
+                text: 'Candlestick with Line',
+                align: 'left'
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: []
+            }
+        }
+    };
+
+    const chartData = coinData ? {
+        series: [
+            {
+                name: 'Candlestick',
+                type: 'candlestick',
+                data: coinData.priceHistory.map(item => ({
+                    x: new Date(item.date),
+                    y: [item.open, item.high, item.low, item.close]
+                }))
+            },
+            {
+                name: 'Line',
+                type: 'line',
+                data: coinData.priceHistory.map(item => ({
+                    x: new Date(item.date),
+                    y: item.price
+                }))
+            }
+        ],
+        options: {
+            chart: {
+                height: 350,
+                type: 'candlestick'
+            },
+            title: {
+                text: 'Candlestick with Line',
+                align: 'left'
+            },
+            xaxis: {
+                type: 'datetime'
+            }
+        }
+    } : defaultData;
 
     return (
         <div>
@@ -45,16 +100,12 @@ function M_fig({ coinName }) {
                 <Typography variant="h6" gutterBottom>
                     {coinName ? `${coinName} Price Chart` : 'Price Chart'}
                 </Typography>
-                <ResponsiveContainer width="100%" height={400}>
-                    <LineChart data={coinData ? coinData.priceHistory : defaultData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="date" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="price" stroke="#8884d8" />
-                    </LineChart>
-                </ResponsiveContainer>
+                <Chart
+                    options={chartData.options}
+                    series={chartData.series}
+                    type="candlestick"
+                    height={350}
+                />
             </Box>
         </div>
     );
