@@ -20,9 +20,10 @@
 ## 실행
 
 ```bash
-# 백엔드
-pip install -r CBS/requirements.txt
-python CBS/Trade/main.py        # CSV 데이터로 백테스트
+# 백엔드 (백테스트에 필요한 최소 의존성)
+pip install backtrader pandas matplotlib
+cd CBS/Trade
+python main.py                  # 포함된 CSV 데이터로 백테스트 (전략·시드는 루트 config.json)
 
 # 프론트
 cd front
@@ -30,6 +31,9 @@ npm install
 npm start
 ```
 
+주의: `CBS/requirements.txt`의 `cctx`는 `ccxt`의 오타다. 전체 설치 시 `ccxt`로 바꿔 설치할 것.
+
 ## 상태
 
 프론트 메인 페이지 단계에서 중단했다. 이후 코인 트레이딩 작업은 웹 UI 대신 CLI·텔레그램 인터페이스 방향으로 전환.
+백테스트 경로는 동작 확인됨 (RSIStrategy, 포함된 BTC 1h CSV 기준).
