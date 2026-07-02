@@ -31,8 +31,6 @@ npm install
 npm start
 ```
 
-주의: `CBS/requirements.txt`의 `cctx`는 `ccxt`의 오타다. 전체 설치 시 `ccxt`로 바꿔 설치할 것.
-
 ## 상태
 
 프론트 메인 페이지 단계에서 중단했다. 이후 코인 트레이딩 작업은 웹 UI 대신 CLI·텔레그램 인터페이스 방향으로 전환.
