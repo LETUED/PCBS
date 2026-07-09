@@ -3,6 +3,7 @@ from flask_cors import CORS
 from CBS.Trade.TopCoin import get_crypto_data, fetch_coin_data
 from CBS.Util.News import parse_news
 import time
+from CBS.Trade.main import run_backtest
 
 
 app = Flask(__name__)
@@ -32,7 +33,7 @@ def news():
 @app.route('/api/backtest')
 def backtest():
     try:
-        data = backtest()
+        data = run_backtest()
         print("Fetched data from backtest:", data)  # 데이터 확인용 출력
         return jsonify(data), 200
     except Exception as e:
@@ -41,13 +42,8 @@ def backtest():
 
 @app.route('/api/dryrun')
 def dryrun():
-    try:
-        data = dryrun()
-        print("Fetched data from dryrun:", data)  # 데이터 확인용 출력
-        return jsonify(data), 200
-    except Exception as e:
-        print("Error occurred:", e)  # 오류 메시지 출력
-        return jsonify({"error": str(e)}), 500
+    # 드라이런 루프는 미구현 — 명시적으로 알린다 (README 상태 절 참고)
+    return jsonify({"error": "dryrun is not implemented"}), 501
 
 @app.route('/api/crypto/<coin_name>', methods=['GET'])
 def crypto_data(coin_name):

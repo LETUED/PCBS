@@ -1,9 +1,10 @@
 import backtrader as bt
 import json
+import os
 
 
 
-with open('stategy.json', 'r') as file:
+with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'stategy.json'), 'r') as file:
     params = json.load(file)
 
 class MACDStrategy(bt.Strategy):
