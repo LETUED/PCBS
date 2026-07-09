@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ConsentDialog from './Action/ConsentDialog';
 import { MAIN_PAGE_ROUTE, TEST_ROUTE } from './routes';
 import BackGround from "./template/BackGround";
-import img1 from '../img/1.jpg';
-import img2 from '../img/2.png';
+import demoImg from '../img/Figure_0.png';
 
 export default function IntroPage() {
     const [open, setOpen] = useState(false);
@@ -72,7 +71,7 @@ function MainContent1() {
                         height: '350px'
                     }}
                 >
-                    <img src={img1} alt="News and Coin Status" style={{ width: '100%', height: '100%', borderRadius: '10px', objectFit: 'cover' }} />
+                    <img src={demoImg} alt="News and Coin Status" style={{ width: '100%', height: '100%', borderRadius: '10px', objectFit: 'cover' }} />
                 </Box>
             </Grid>
         </Grid>
@@ -96,7 +95,7 @@ function MainContent2() {
                         height: '350px',
                     }}
                 >
-                    <img src={img2} alt="Test Your Strategy" style={{ width: '100%', height: '100%', borderRadius: '10px', objectFit: 'cover' }} />
+                    <img src={demoImg} alt="Test Your Strategy" style={{ width: '100%', height: '100%', borderRadius: '10px', objectFit: 'cover' }} />
                 </Box>
             </Grid>
             <Grid item xs={5}>

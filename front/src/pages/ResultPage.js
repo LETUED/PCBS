@@ -6,7 +6,7 @@ import MoveEvent from "./Button/MovePage";
 import {MAIN_PAGE_ROUTE, RESULT_ROUTE} from "./routes";
 import Title from "./template/Title";
 import {useNavigate} from "react-router-dom";
-import image from "/Users/jeondonghwan/Desktop/PCBS/front/src/img/Figure_0.png"
+import image from "../img/Figure_0.png"
 
 function ResultPage() {
     const title = "Result";

@@ -7,6 +7,7 @@ import MoveEvent from "./Button/MovePage";
 import NewsBox from "./components/NewsBox";
 import TopDataBox from "./components/TopDataBox";
 import M_fig from "./components/M_fig";
+import BacktestBox from "./components/BacktestBox";
 
 function MainPage() {
     const title = 'Main Page';
@@ -35,6 +36,7 @@ function MainPage() {
                     </Grid>
                 </Grid>
                 <M_fig coinName={selectedCoin} />
+                <BacktestBox />
                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', mt: 2 }}>
                     <MoveEvent route={CONFIG_ROUTE} />
                 </Box>
