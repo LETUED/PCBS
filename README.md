@@ -54,4 +54,4 @@ CLI 백테스트만 돌리려면: `python CBS/Trade/main.py` (성과 dict 출력
 
 ## 라이선스
 
-[GPL-3.0](LICENSE). backtrader·Freqtrade(GPL 계열)에 의존하므로 같은 조건을 따른다.
+[MIT License](LICENSE). 누구나 자유롭게 쓸 수 있다.
