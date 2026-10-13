@@ -51,3 +51,7 @@ CLI 백테스트만 돌리려면: `python CBS/Trade/main.py` (성과 dict 출력
 프론트 메인 페이지 단계에서 중단. 백테스트 경로는 동작 확인됨 (RSIStrategy, 포함된 BTC 1h CSV 기준). 이 경험이 이후 봇들을 웹 UI 대신 CLI·텔레그램 인터페이스로 설계한 계기가 됐다.
 
 2026-07 마무리: 중단 지점이었던 프론트를 완성 — 빌드 브레이커(누락 이미지·절대경로 import) 수정, `/api/backtest` 무한재귀를 `run_backtest()` 연결로 교체, 메인 페이지에 결과 표시. 드라이런 API는 미구현으로 남김(501 응답). CLI 차트는 backtrader 1.9와 신형 matplotlib 비호환으로 미제공.
+
+## 라이선스
+
+[GPL-3.0](LICENSE). backtrader·Freqtrade(GPL 계열)에 의존하므로 같은 조건을 따른다.
